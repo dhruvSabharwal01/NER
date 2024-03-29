@@ -1,0 +1,19 @@
+********KISI WORD KA POORI CSV MEIN LABEL CHANGE KRNE KE LIYE******
+
+# Define a function to replace 'org' tag for 'care' with 'O'
+def replace_care_org(tag_string, text_string):
+    tags = tag_string.split()
+    words = text_string.split()
+    updated_tags = []
+    for tag, word in zip(tags, words):
+        if word.lower() == 'care' and tag == 'org':
+            updated_tags.append('O')
+        else:
+            updated_tags.append(tag)
+    return ' '.join(updated_tags)
+
+# Apply the function to the 'ner_tags' column
+df['ner_tags'] = df.apply(lambda row: replace_care_org(row['ner_tags'], row['text']), axis=1)
+
+# Save the updated DataFrame back to CSV
+df.to_csv('updated_dataset.csv', index=False)
