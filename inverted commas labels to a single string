@@ -1,0 +1,9 @@
+###  ['O', 'O', 'B-FEATURES', 'O', 'O']  -->>>  O O B-FEATURES O O
+#### Changing the file column of labels from this format to string format
+
+dummy = pd.read_csv('/mnt/hdd4/utsav/ner_pb/pbner/data/new_test_retagged_without_duplicates.csv')
+print(dummy)
+dummy['tags']=dummy['tags'].apply(
+    lambda x: ' '.join(eval(x))
+)
+dummy.to_csv('/mnt/hdd4/utsav/ner_pb/pbner/data/new_test_retagged_without_duplicates.csv')
